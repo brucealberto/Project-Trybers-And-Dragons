@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-import { runBattles, pve, pvp, player1, player2, player3, monster1, monster2 } from '../../src';
-import Battle from '../../src/Battle';
-import Fighter from '../../src/Fighter';
+import { PVE } from '../../src/Battle';
+import Character from '../../src/Character';
+import Fighter, { SimpleFighter } from '../../src/Fighter';
+import Monster from '../../src/Monster';
 
-class B extends Battle { }
 class F implements Fighter {
   constructor(
     public lifePoints = 10,
@@ -11,47 +10,19 @@ class F implements Fighter {
     public defense = 10,
   ) { }
   levelUp(): void { }
-  special(enemy: Fighter): void { }
-  attack(enemy: Fighter): void { }
-  receiveDamage(amount: number): void { }
-}
-const b = new B(new F());
-
-const result = () => {
-  runBattles([pve, pvp, b]);
-  let res = true;
-  if (player1.lifePoints !== -1) {
-    if (monster1.lifePoints !== -1 && monster2.lifePoints !== -1) res = false;
-  }
-  if (player2.lifePoints !== -1 && player3.lifePoints !== -1) res = false;
-  return res;
-};
-=======
-import { runBattles, pve, pvp, player1, player2, player3, monster1, monster2 } from '../../src';
-import Battle from '../../src/Battle';
-import Fighter from '../../src/Fighter';
-
-class B extends Battle { }
-class F implements Fighter {
-  constructor(
-    public lifePoints = 10,
-    public strength = 10,
-    public defense = 10,
-  ) { }
-  levelUp(): void { }
-  special(enemy: Fighter): void { }
-  attack(enemy: Fighter): void { }
+  special(enemy: SimpleFighter): void { }
+  attack(enemy: SimpleFighter): void { }
   receiveDamage(amount: number): number { return 0; }
 }
-const b = new B(new F());
 
-const result = () => {
-  runBattles([pve, pvp, b]);
-  let res = true;
-  if (player1.lifePoints !== -1) {
-    if (monster1.lifePoints !== -1 && monster2.lifePoints !== -1) res = false;
-  }
-  if (player2.lifePoints !== -1 && player3.lifePoints !== -1) res = false;
-  return res;
-};
->>>>>>> 3f434069382e9aed5b4448880b087260b658df63
+class S implements SimpleFighter {
+  constructor(
+    public lifePoints = 10,
+    public strength = 10,
+  ) { }
+  attack(enemy: SimpleFighter): void { }
+  receiveDamage(amount: number): number { return 0; }
+}
+
+const pve1 = new PVE(new Character(''), [new Monster()]);
+const pve2 = new PVE(new F(), [new S()]);
