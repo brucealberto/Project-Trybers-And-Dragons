@@ -8,6 +8,7 @@ export default class Monster implements SimpleFighter {
     this._strength = 63;
   }
 
+  // fix push
   get lifePoints():number {
     return this._lifePoints;
   }
